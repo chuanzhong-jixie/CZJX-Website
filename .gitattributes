@@ -1,0 +1,2 @@
+# 统一换行符：_headers 等配置被 CRLF 破坏会直接影响部署
+* text=auto eol=lf
