@@ -205,12 +205,8 @@ main {
   place-items: center;
   width: 2.5rem;
   height: 2.5rem;
-  padding: 2px;
-  border: 1px solid var(--line-cyan-strong);
   border-radius: 10px;
-  background: var(--bg-deep);
   overflow: hidden;
-  box-shadow: 0 0 14px rgba(0, 255, 255, 0.35);
 }
 
 .brand__mark img {
@@ -218,8 +214,6 @@ main {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* 图案满铺时只圆外层没用，图片本身也要圆，圆角才看得出来 */
-  border-radius: 7px;
 }
 
 .brand__text {
