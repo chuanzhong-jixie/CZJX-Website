@@ -60,7 +60,7 @@ git config --global --get user.email
 找社团的项目仓库，在本地任意目录执行：
 
 ```bash
-git clone https://github.com/Foxelf-Studio/CZJX-Website.git
+git clone https://github.com/chuanzhong-jixie/CZJX-Website.git
 cd CZJX-Website
 code .
 ```
