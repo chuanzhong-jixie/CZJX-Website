@@ -70,7 +70,7 @@ python -m http.server 8000
   "title": "活动标题",
   "startAt": "2027-03-14T19:00:00+08:00",
   "endAt": "2027-03-14T21:00:00+08:00",
-  "location": "综合楼 3F · 计算机活动室",
+  "location": "图书馆2楼 · 计算机活动室",
   "tags": ["分享会"],
   "summary": "一句话说明这场活动讲什么。",
   "details": ["19:00 — 第一段", "19:40 — 第二段"]
@@ -109,7 +109,7 @@ python -m http.server 8000
 上线前请替换成真实信息：
 
 - `about.html` 的联系邮箱 `czjx@example.edu.cn`。
-- 首页与 `about.html` 里「综合楼 3F」「每周三 19:00」等活动室与时间描述。
+- 首页与 `about.html` 里「图书馆2楼」「每周三第 8 节课」等活动室与时间描述。
 - 页脚年份与 `_headers` 中的安全策略（如需嵌入外部内容，需放宽 `X-Frame-Options`）。
 - 各页 `<meta name="description">` 如需针对具体学校措辞调整。
 
