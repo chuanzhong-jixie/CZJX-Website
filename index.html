@@ -11,7 +11,6 @@
 </head>
 <body>
 <a class="skip-link" href="#main">跳到主要内容</a>
-<div class="fx" aria-hidden="true"></div>
 
 <header class="site-header">
   <div class="container header-inner">
@@ -34,19 +33,36 @@
 <main id="main" class="container" tabindex="-1">
 
   <section class="hero" aria-labelledby="hero-title">
-    <p class="eyebrow">// CZJX · 川中计算机协会</p>
+    <p class="hero__status">
+      <span class="dot" aria-hidden="true"></span>
+      <span>SYSTEM_ONLINE</span>
+      <span class="hero__sep" aria-hidden="true">|</span>
+      <span class="hero__dim">每周三 19:00 · 综合楼 3F</span>
+    </p>
     <h1 class="hero__title" id="hero-title">川中计算机协会</h1>
-    <p class="hero__tagline">在这里，把想法写成代码，也把代码跑成作品。</p>
-    <p class="hero__lede">面向全校计算机爱好者的技术社团。每周技术分享、项目协作与算法训练的安排都在这里公布，社团内部资料统一归档在文档库。</p>
+    <p class="hero__sub">CZJX // COMPUTER ASSOCIATION</p>
+    <p class="hero__lede">&gt; 面向全校计算机爱好者的技术社团。每周技术分享、项目协作与算法训练的安排都在这里公布，社团内部资料统一归档在文档库。<span class="cursor" aria-hidden="true">_</span></p>
     <div class="hero__actions">
       <a class="btn btn--primary" href="activities.html">查看最新活动</a>
       <a class="btn btn--ghost" href="docs.html">浏览文档</a>
     </div>
-    <ul class="hero__facts">
-      <li><strong>每周三 19:00</strong> 技术分享</li>
-      <li><strong>综合楼 3F</strong> 计算机活动室</li>
-      <li><strong>2019</strong> 年成立</li>
-    </ul>
+    <div class="hud-row">
+      <div class="hud hud--cyan">
+        <span class="hud__num">2019</span>
+        <span class="hud__unit">年成立</span>
+        <span class="hud__label">ESTABLISHED</span>
+      </div>
+      <div class="hud hud--magenta">
+        <span class="hud__num">03</span>
+        <span class="hud__unit">个方向</span>
+        <span class="hud__label">TRACKS</span>
+      </div>
+      <div class="hud hud--green">
+        <span class="hud__num">01</span>
+        <span class="hud__unit">次 / 周</span>
+        <span class="hud__label">TECH_SHARE</span>
+      </div>
+    </div>
   </section>
 
   <section class="section" aria-labelledby="latest-title">
