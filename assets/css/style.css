@@ -280,38 +280,10 @@ main {
 
 /* -------------------------------- 主视觉 -------------------------------- */
 
+/* 主视觉不套面板：showcase 的 hero 是开放式区块，四角准星只属于 HUD 指标块 */
 .hero {
   position: relative;
-  padding: clamp(1.75rem, 4.5vw, 3.25rem) clamp(1.25rem, 4vw, 3rem)
-    clamp(1.75rem, 4.5vw, 3rem);
-  border: 1px solid var(--line-cyan);
-  background-color: var(--bg-panel);
-  background-image: var(--scanlines);
-  box-shadow: inset 0 0 90px rgba(0, 255, 255, 0.05),
-    0 0 24px rgba(0, 255, 255, 0.12);
-  overflow: hidden;
-}
-
-/* 四角准星 */
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: linear-gradient(var(--cyan), var(--cyan)),
-    linear-gradient(var(--cyan), var(--cyan)),
-    linear-gradient(var(--cyan), var(--cyan)),
-    linear-gradient(var(--cyan), var(--cyan)),
-    linear-gradient(var(--cyan), var(--cyan)),
-    linear-gradient(var(--cyan), var(--cyan)),
-    linear-gradient(var(--cyan), var(--cyan)),
-    linear-gradient(var(--cyan), var(--cyan));
-  background-repeat: no-repeat;
-  background-size: 16px 2px, 2px 16px, 16px 2px, 2px 16px, 16px 2px, 2px 16px,
-    16px 2px, 2px 16px;
-  background-position: left top, left top, right top, right top, left bottom,
-    left bottom, right bottom, right bottom;
-  opacity: 0.7;
+  padding: clamp(0.75rem, 2.5vw, 1.75rem) 0 clamp(1.5rem, 4vw, 2.5rem);
 }
 
 .hero__status {
@@ -456,14 +428,17 @@ main {
 
 .hud--cyan {
   color: var(--cyan);
+  border-color: rgba(0, 255, 255, 0.22);
 }
 
 .hud--magenta {
   color: var(--magenta);
+  border-color: rgba(255, 0, 255, 0.22);
 }
 
 .hud--green {
   color: var(--green);
+  border-color: rgba(0, 255, 0, 0.22);
 }
 
 .hud__num {
