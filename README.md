@@ -87,6 +87,8 @@ python -m http.server 8000
 
 独立活动页左上角的返回按钮会读 `document.referrer`：从活动排期点进去的返回「活动排期」，直接打开或从别处进来的返回「首页」。页内已内置这段脚本，新增活动页时复制 `events/ai-contest.html` 的写法即可。
 
+活动页的分享预览（微信、QQ、Telegram 等）由 `<head>` 里的 `og:*` / `twitter:*` 标签决定，标题、描述、配图都在那里。配图是 `assets/img/ai-contest-og.png`（1200×630）。**其中 `og:image` / `og:url` 写的是绝对地址**（当前 `https://czjx-website.pages.dev`），绑定自定义域名后必须同步改掉，否则分享卡片取不到图。
+
 - `id` 会作为页内锚点，保持唯一，用英文小写加连字符。
 - **不要手动写「已结束」「即将开始」**。状态由 `startAt` / `endAt` 与当前时间比较得出，全站自动同步。
 - 时间必须带 `+08:00` 时区偏移，否则按 UTC 解析，会差 8 小时。
