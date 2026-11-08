@@ -23,6 +23,94 @@
       display: none;
     }
   }
+</style><style id="cz-qr-style">
+  [data-qq-qr] {
+    cursor: pointer;
+  }
+
+  .cz-qr {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .cz-qr.is-open {
+    display: flex;
+  }
+
+  .cz-qr__mask {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 0, 15, 0.88);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  .cz-qr__panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    width: min(92vw, 26rem);
+    max-height: 92vh;
+    overflow: auto;
+    padding: 1rem 1rem 1.1rem;
+    background: #0d0221;
+    border: 1px solid rgba(255, 0, 255, 0.55);
+    box-shadow: 0 0 40px rgba(255, 0, 255, 0.35);
+  }
+
+  .cz-qr__title {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #ff6ec7;
+    text-align: center;
+  }
+
+  .cz-qr__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #fff;
+  }
+
+  .cz-qr__hint {
+    margin: 0;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.62);
+    text-align: center;
+  }
+
+  .cz-qr__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid rgba(255, 0, 255, 0.5);
+    background: rgba(13, 2, 33, 0.9);
+    color: #ff6ec7;
+    cursor: pointer;
+  }
+
+  .cz-qr__close:hover,
+  .cz-qr__close:focus-visible {
+    background: rgba(255, 0, 255, 0.18);
+    color: #ffffff;
+  }
+
+  body.cz-qr-open {
+    overflow: hidden;
+  }
 </style></head><body class="__variable_c30ffb __variable_45387e __variable_62abfd antialiased" style="background: rgb(13, 2, 33);" data-page-node-id="W5XXpUCWJdnePYfeY8YYJj"><div hidden="" data-page-node-id="m6HcMgb3yJFvcd39jpwNqm"><!--$--><!--/$--></div><!--$!--><template data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING" data-page-node-id="LudHfriN4ytaUG2V7Jgp8G"></template><!--/$--><div role="banner" data-site-announcement="true" class="sticky top-0 z-50 flex items-center justify-center gap-3 px-4 py-2.5 text-sm font-medium bg-foreground text-background" data-page-node-id="ik0nQyeYMBNnk51Vtbr3de"><span class="hidden sm:inline text-xs tracking-widest uppercase opacity-60" data-page-node-id="cGvQEUKd3PykQXiw4ab2eH">大赛公告</span><span class="cz-announce-text truncate max-w-xl min-w-0" data-page-node-id="nMQdsdhkhFvLkaUX8qVLIG"><span class="cz-announce-lead">AI 应用创作大赛 · </span><span data-status-text="" data-page-node-id="zxDY5qQmtxY1oAUpSsIwJr">未正式开始，可准备参赛作品</span></span><span class="hidden max-w-xl truncate text-xs font-normal opacity-70 md:inline" title="用 AI Agent 制作有价值的应用或游戏，平台不限、技术栈不限，开赛前即可动手开发。" data-page-node-id="crVVQhZxQ3RRBK670Da5mv">用 AI Agent 制作有价值的应用或游戏，平台不限、技术栈不限，开赛前即可动手开发。</span><a class="shrink-0 underline underline-offset-2 opacity-80 hover:opacity-100 transition-opacity" href="#about" data-page-node-id="RfwoiF1pedc1Q8V2N38O5X">了解详情</a><button type="button" class="shrink-0 ml-2 opacity-60 hover:opacity-100 transition-opacity" aria-label="关闭公告" data-announce-close data-page-node-id="M0yXNFzDkXH0InQjkHZZYs"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="Sl8oxctlxvPry8cTSQOCpV"><path d="M1 1l12 12M13 1L1 13" data-page-node-id="XUlGpqIDrK1pFDSSKdEPq4"></path></svg></button></div><!--$--><!--$?--><template id="B:0" data-page-node-id="1MaE8BHIs5DuAINeuCLbp5"></template><!--/$--><!--$--><!--/$--><!--/$--><!--$--><!--/$--><!--$!--><template data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING" data-page-node-id="RVwfcAYyDLC9jwpbcFr8Kj"></template><!--/$--><div id="S:0" data-page-node-id="0M2uBZmF6s6NmqyEZK9ryu"><div class="min-h-screen relative overflow-x-hidden" style="background:linear-gradient(to bottom, #0d0221, #150050, #2d1b4e, #0d0221)" data-page-node-id="UHJ4KhoYuEITlYTmZocBLr"><style data-page-node-id="V6MHDuBgG2sw3qM9dmUwmB">
         @keyframes gridScroll {
           0% { background-position: 0 0; }
@@ -57,7 +145,7 @@
         .synth-grid-scroll {
           animation: gridScroll 4s linear infinite;
         }
-      </style><div class="fixed bottom-[18%] left-1/2 pointer-events-none z-0" style="width:480px;height:240px;transform:translateX(-50%);animation:sunPulse 4s ease-in-out infinite" data-page-node-id="vWCmeoRscMChfkjBwiYM5e"><div class="absolute inset-0 rounded-t-full" style="background:linear-gradient(to top, #fca311, #ff6b35, #ff1493, #7b68ee, transparent);opacity:0.85" data-page-node-id="Zef9NVnxgSZt6qdgGG6n5s"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:28px" data-page-node-id="DMpX9y9Dig7hxrRv4b033t"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:50px" data-page-node-id="FlDE7hazNDbFjk2A30Lsaz"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:72px" data-page-node-id="70ngENXMVKCfSSHpCBGAHE"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:94px" data-page-node-id="dtchsVGSL3gOA6L2Bc1gSk"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:116px" data-page-node-id="sUd7IH5wqMaZSbd04nBN2o"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:138px" data-page-node-id="Wt62WZQiw6IWTf2NYg74fR"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:160px" data-page-node-id="DbX8272dMUoOvde34BTAzs"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:182px" data-page-node-id="HW112ArgeMjt1lfZbZPZdh"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:204px" data-page-node-id="wKJtGkG5CbJfiYrIfG5PdY"></div></div><div class="fixed pointer-events-none z-0" style="bottom:14%;left:0;right:0;height:160px" data-page-node-id="gi0wKw54tcwqyhySDzchkU"><svg viewBox="0 0 1440 160" class="w-full h-full" preserveAspectRatio="none" data-page-node-id="BSx4vpKuMsLOGwfNuvpbXh"><defs data-page-node-id="GBB3FaXmdGaUgHaimc2P5g"><linearGradient id="mtnGrad" x1="0%" y1="0%" x2="0%" y2="100%" data-page-node-id="pdPFQ3CLgfV0Bd0SX4ERjL"><stop offset="0%" stop-color="#2d1b4e" data-page-node-id="VwxFpKGt6X1zSeAACE71DV"></stop><stop offset="100%" stop-color="#150050" data-page-node-id="KeoBH6oe119LWEIwnujZN5"></stop></linearGradient></defs><polygon points="0,160 0,110 80,70 160,100 300,30 440,80 560,10 680,55 800,20 960,65 1100,35 1260,75 1380,45 1440,80 1440,160" fill="url(#mtnGrad)" data-page-node-id="qoCTAcudGiAV1qtBi3EQrq"></polygon></svg></div><div class="fixed bottom-0 left-0 right-0 pointer-events-none z-0 overflow-hidden" style="height:18%" data-page-node-id="svPIWoypG29MCytZRHRWlL"><div class="absolute inset-0 synth-grid-scroll" style="background-image:linear-gradient(rgba(255,0,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,0,255,0.5) 1px, transparent 1px);background-size:80px 80px;transform:perspective(400px) rotateX(70deg);transform-origin:bottom center" data-page-node-id="mcmViQhAuh0pLu2YA4uPkA"></div></div><div class="fixed inset-0 pointer-events-none z-50 opacity-[0.025]" style="background-image:repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.4) 2px, rgba(0,0,0,0.4) 4px)" data-page-node-id="KeREIlLWLbfDPp1sCxPNlt"></div><nav class="relative z-10 px-6 py-4 border-b border-[#ff00ff]/25 backdrop-blur-md bg-[#0d0221]/50" data-page-node-id="ExBJo6Y9cCa34YlmxmvIsB"><div class="max-w-6xl mx-auto flex items-center justify-between" style="position:relative" data-page-node-id="udJIToco64Gd56aVWdPyLN"><a class="group flex items-center gap-2 text-[#ff6ec7] hover:text-[#ff00ff] transition-colors duration-200" href="../index.html" data-back-link="" data-page-node-id="cMIcPV3LqqoDd9R9HStCsg"><svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-page-node-id="7cDqvA1sPkW3BydgK4CzhZ"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" data-page-node-id="j54LlfBmVNLciI0bg71sTC"></path></svg><span class="font-bold uppercase tracking-[0.15em] text-sm" data-back-label="" data-page-node-id="K8DOGFpMI2SeDAWxEedm6s">龙川一中计算机协会</span></a><div class="cz-nav-center flex items-center gap-2" style="position:absolute;left:50%;transform:translateX(-50%)" data-page-node-id="GBD3FP6o10GnEKyQPvQEHG"><div class="w-2 h-2 bg-[#ff00ff] rounded-full synth-flicker" style="box-shadow:0 0 8px rgba(255,0,255,1)" data-page-node-id="CHSgQy8YE15u93FpXQjPDT"></div><span class="font-black text-lg uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-[#ff00ff] via-[#7b68ee] to-[#00ffff]" data-page-node-id="A1IC3kc0f5Sx24Sq528MuE">AI应用创作大赛</span><div class="w-2 h-2 bg-[#00ffff] rounded-full synth-flicker" style="box-shadow:0 0 8px rgba(0,255,255,1);animation-delay:1.5s" data-page-node-id="P23wqzgFsoW0U4SLFJUfQx"></div></div><a class="px-4 py-2 border border-[#ff00ff]/50 text-[#ff00ff] font-bold uppercase tracking-wider text-sm shadow-[0_0_12px_rgba(255,0,255,0.3)] hover:bg-[#ff00ff]/10 hover:shadow-[0_0_20px_rgba(255,0,255,0.5)] hover:border-[#ff00ff] transition-all duration-200" href="https://qun.qq.com/universal-share/share?ac=1&amp;authKey=%2BUw3wONrcpp5oVjkbDVVsOi4W2r%2FDtMYBXjppgTMOxCS6rGFfsH%2FRzTHlcrMV3%2Fu&amp;busi_data=eyJncm91cENvZGUiOiIzMzQ5NjU0MjEiLCJ0b2tlbiI6IjNVQ051R3lOb1ZlNHpsbGhsMnR2ME5RVGhjK3JxUm5jSDdqb1Q0WWRZSFhESFFyRWNwc2RnU3ZwS3hCa2pHWVIiLCJ1aW4iOiIzMTAxOTI1NDMwIn0%3D&amp;data=1biB2Nkf64EtJ5EzC1P7lbwUkk56yjMYsl7DNeX50FagsJ_9N8lu7IEF44ryfDrpO8PPICQjFdsu7H-K74VgRA&amp;svctype=4&amp;tempid=h5_group_info" target="_blank" rel="noopener" data-page-node-id="J6CiCnODIyNcVEKAqCHoSq">加社团群</a></div></nav><section class="relative z-10 pt-28 pb-32 px-6 text-center" data-page-node-id="PKDd0b1uhFeVf9e1LcABFP"><div style="opacity:0;transform:translateY(32px);transition:opacity 1s cubic-bezier(0.16,1,0.3,1) 0.1s, transform 1s cubic-bezier(0.16,1,0.3,1) 0.1s" data-page-node-id="IXURRK0psXk5z5o3cnI94Y"><p class="text-xs font-bold text-[#ff6ec7]/70 uppercase tracking-[0.5em] mb-6" data-page-node-id="93IIlVZvYTkjyKntq1sglD">计算机协会 · 2026</p><h1 class="text-6xl md:text-8xl lg:text-[10rem] font-black uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-[#ff6ec7] via-[#ff00ff] to-[#7b68ee] mb-4 synth-title-glow leading-none" style="font-family:'ZihunBianTaoTi','字魂扁桃体','Microsoft YaHei','PingFang SC','Noto Sans SC',sans-serif;font-weight:400" data-page-node-id="MFNYRzGz4ujQArtxZUofQ2">AI应用</h1><h1 class="text-6xl md:text-8xl lg:text-[10rem] font-black uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-[#00ffff] via-[#7b68ee] to-[#ff1493] mb-8 leading-none" style="text-shadow:0 0 40px rgba(0,255,255,0.4);font-family:'ZihunBianTaoTi','字魂扁桃体','Microsoft YaHei','PingFang SC','Noto Sans SC',sans-serif;font-weight:400" data-page-node-id="NF4KNA6FaVBvVbbThZgJuR">创作大赛</h1><p class="text-xl md:text-2xl text-[#ff6ec7]/80 max-w-xl mx-auto mb-3 tracking-wide font-light" data-page-node-id="T8JnN5cEoehkrdMb41CowF">用 AI Agent 铸造你的第一个作品，让想象落地成真。</p><p class="text-sm text-[#7b68ee]/60 uppercase tracking-[0.3em] mb-12" data-page-node-id="LYMDLHOAPAZeg1JMA26Raa">平台不限 · 技术栈不限 · 开赛前即可开发</p><div class="flex flex-wrap justify-center gap-6" data-page-node-id="tG3yLrDzWtiVtpAJnwc7to"><a class="group px-10 py-4 bg-transparent border-2 border-[#ff00ff] text-[#00ffff] font-bold uppercase tracking-[0.15em] shadow-[0_0_15px_rgba(255,0,255,0.4),inset_0_0_10px_rgba(0,255,255,0.2)] hover:border-[#00ffff] hover:shadow-[0_0_30px_rgba(0,255,255,0.8),inset_0_0_20px_rgba(255,0,255,0.6)] active:scale-90 active:bg-white active:text-black active:shadow-[0_0_50px_#ffffff] transition-all duration-200 ease-out" href="https://qun.qq.com/universal-share/share?ac=1&amp;authKey=%2BUw3wONrcpp5oVjkbDVVsOi4W2r%2FDtMYBXjppgTMOxCS6rGFfsH%2FRzTHlcrMV3%2Fu&amp;busi_data=eyJncm91cENvZGUiOiIzMzQ5NjU0MjEiLCJ0b2tlbiI6IjNVQ051R3lOb1ZlNHpsbGhsMnR2ME5RVGhjK3JxUm5jSDdqb1Q0WWRZSFhESFFyRWNwc2RnU3ZwS3hCa2pHWVIiLCJ1aW4iOiIzMTAxOTI1NDMwIn0%3D&amp;data=1biB2Nkf64EtJ5EzC1P7lbwUkk56yjMYsl7DNeX50FagsJ_9N8lu7IEF44ryfDrpO8PPICQjFdsu7H-K74VgRA&amp;svctype=4&amp;tempid=h5_group_info" target="_blank" rel="noopener" data-page-node-id="kK78iGCRjFyCUByeJtXBAK">加社团群</a><a href="../docs.html" class="group px-10 py-4 bg-gradient-to-r from-[#ff00ff] via-[#7b68ee] to-[#ff00ff] bg-[length:200%_100%] text-white font-bold uppercase tracking-[0.15em] shadow-[0_0_30px_rgba(255,0,255,0.5)] hover:shadow-[0_0_50px_rgba(255,0,255,0.8)] hover:bg-right active:scale-90 active:bg-white active:text-black active:shadow-[0_0_50px_#ffffff] transition-all duration-500 ease-out" data-page-node-id="6Yh4bITgGFy0zDx8pm8duL">查看文档</a></div></div></section><section class="relative z-10 py-20 px-6" id="about" data-page-node-id="WWJvsjHzZyCV8IbFeT89ph"><div class="max-w-6xl mx-auto" data-page-node-id="mKZXYFCc8b5QY4VL6kASw1">
+      </style><div class="fixed bottom-[18%] left-1/2 pointer-events-none z-0" style="width:480px;height:240px;transform:translateX(-50%);animation:sunPulse 4s ease-in-out infinite" data-page-node-id="vWCmeoRscMChfkjBwiYM5e"><div class="absolute inset-0 rounded-t-full" style="background:linear-gradient(to top, #fca311, #ff6b35, #ff1493, #7b68ee, transparent);opacity:0.85" data-page-node-id="Zef9NVnxgSZt6qdgGG6n5s"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:28px" data-page-node-id="DMpX9y9Dig7hxrRv4b033t"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:50px" data-page-node-id="FlDE7hazNDbFjk2A30Lsaz"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:72px" data-page-node-id="70ngENXMVKCfSSHpCBGAHE"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:94px" data-page-node-id="dtchsVGSL3gOA6L2Bc1gSk"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:116px" data-page-node-id="sUd7IH5wqMaZSbd04nBN2o"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:138px" data-page-node-id="Wt62WZQiw6IWTf2NYg74fR"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:160px" data-page-node-id="DbX8272dMUoOvde34BTAzs"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:182px" data-page-node-id="HW112ArgeMjt1lfZbZPZdh"></div><div class="absolute left-0 right-0" style="height:4px;background:#0d0221;bottom:204px" data-page-node-id="wKJtGkG5CbJfiYrIfG5PdY"></div></div><div class="fixed pointer-events-none z-0" style="bottom:14%;left:0;right:0;height:160px" data-page-node-id="gi0wKw54tcwqyhySDzchkU"><svg viewBox="0 0 1440 160" class="w-full h-full" preserveAspectRatio="none" data-page-node-id="BSx4vpKuMsLOGwfNuvpbXh"><defs data-page-node-id="GBB3FaXmdGaUgHaimc2P5g"><linearGradient id="mtnGrad" x1="0%" y1="0%" x2="0%" y2="100%" data-page-node-id="pdPFQ3CLgfV0Bd0SX4ERjL"><stop offset="0%" stop-color="#2d1b4e" data-page-node-id="VwxFpKGt6X1zSeAACE71DV"></stop><stop offset="100%" stop-color="#150050" data-page-node-id="KeoBH6oe119LWEIwnujZN5"></stop></linearGradient></defs><polygon points="0,160 0,110 80,70 160,100 300,30 440,80 560,10 680,55 800,20 960,65 1100,35 1260,75 1380,45 1440,80 1440,160" fill="url(#mtnGrad)" data-page-node-id="qoCTAcudGiAV1qtBi3EQrq"></polygon></svg></div><div class="fixed bottom-0 left-0 right-0 pointer-events-none z-0 overflow-hidden" style="height:18%" data-page-node-id="svPIWoypG29MCytZRHRWlL"><div class="absolute inset-0 synth-grid-scroll" style="background-image:linear-gradient(rgba(255,0,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,0,255,0.5) 1px, transparent 1px);background-size:80px 80px;transform:perspective(400px) rotateX(70deg);transform-origin:bottom center" data-page-node-id="mcmViQhAuh0pLu2YA4uPkA"></div></div><div class="fixed inset-0 pointer-events-none z-50 opacity-[0.025]" style="background-image:repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.4) 2px, rgba(0,0,0,0.4) 4px)" data-page-node-id="KeREIlLWLbfDPp1sCxPNlt"></div><nav class="relative z-10 px-6 py-4 border-b border-[#ff00ff]/25 backdrop-blur-md bg-[#0d0221]/50" data-page-node-id="ExBJo6Y9cCa34YlmxmvIsB"><div class="max-w-6xl mx-auto flex items-center justify-between" style="position:relative" data-page-node-id="udJIToco64Gd56aVWdPyLN"><a class="group flex items-center gap-2 text-[#ff6ec7] hover:text-[#ff00ff] transition-colors duration-200" href="../index.html" data-back-link="" data-page-node-id="cMIcPV3LqqoDd9R9HStCsg"><svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-page-node-id="7cDqvA1sPkW3BydgK4CzhZ"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" data-page-node-id="j54LlfBmVNLciI0bg71sTC"></path></svg><span class="font-bold uppercase tracking-[0.15em] text-sm" data-back-label="" data-page-node-id="K8DOGFpMI2SeDAWxEedm6s">龙川一中计算机协会</span></a><div class="cz-nav-center flex items-center gap-2" style="position:absolute;left:50%;transform:translateX(-50%)" data-page-node-id="GBD3FP6o10GnEKyQPvQEHG"><div class="w-2 h-2 bg-[#ff00ff] rounded-full synth-flicker" style="box-shadow:0 0 8px rgba(255,0,255,1)" data-page-node-id="CHSgQy8YE15u93FpXQjPDT"></div><span class="font-black text-lg uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-[#ff00ff] via-[#7b68ee] to-[#00ffff]" data-page-node-id="A1IC3kc0f5Sx24Sq528MuE">AI应用创作大赛</span><div class="w-2 h-2 bg-[#00ffff] rounded-full synth-flicker" style="box-shadow:0 0 8px rgba(0,255,255,1);animation-delay:1.5s" data-page-node-id="P23wqzgFsoW0U4SLFJUfQx"></div></div><button type="button" class="px-4 py-2 border border-[#ff00ff]/50 text-[#ff00ff] font-bold uppercase tracking-wider text-sm shadow-[0_0_12px_rgba(255,0,255,0.3)] hover:bg-[#ff00ff]/10 hover:shadow-[0_0_20px_rgba(255,0,255,0.5)] hover:border-[#ff00ff] transition-all duration-200" data-page-node-id="J6CiCnODIyNcVEKAqCHoSq" data-qq-qr>加社团群</button></div></nav><section class="relative z-10 pt-28 pb-32 px-6 text-center" data-page-node-id="PKDd0b1uhFeVf9e1LcABFP"><div style="opacity:0;transform:translateY(32px);transition:opacity 1s cubic-bezier(0.16,1,0.3,1) 0.1s, transform 1s cubic-bezier(0.16,1,0.3,1) 0.1s" data-page-node-id="IXURRK0psXk5z5o3cnI94Y"><p class="text-xs font-bold text-[#ff6ec7]/70 uppercase tracking-[0.5em] mb-6" data-page-node-id="93IIlVZvYTkjyKntq1sglD">计算机协会 · 2026</p><h1 class="text-6xl md:text-8xl lg:text-[10rem] font-black uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-[#ff6ec7] via-[#ff00ff] to-[#7b68ee] mb-4 synth-title-glow leading-none" style="font-family:'ZihunBianTaoTi','字魂扁桃体','Microsoft YaHei','PingFang SC','Noto Sans SC',sans-serif;font-weight:400" data-page-node-id="MFNYRzGz4ujQArtxZUofQ2">AI应用</h1><h1 class="text-6xl md:text-8xl lg:text-[10rem] font-black uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-[#00ffff] via-[#7b68ee] to-[#ff1493] mb-8 leading-none" style="text-shadow:0 0 40px rgba(0,255,255,0.4);font-family:'ZihunBianTaoTi','字魂扁桃体','Microsoft YaHei','PingFang SC','Noto Sans SC',sans-serif;font-weight:400" data-page-node-id="NF4KNA6FaVBvVbbThZgJuR">创作大赛</h1><p class="text-xl md:text-2xl text-[#ff6ec7]/80 max-w-xl mx-auto mb-3 tracking-wide font-light" data-page-node-id="T8JnN5cEoehkrdMb41CowF">用 AI Agent 铸造你的第一个作品，让想象落地成真。</p><p class="text-sm text-[#7b68ee]/60 uppercase tracking-[0.3em] mb-12" data-page-node-id="LYMDLHOAPAZeg1JMA26Raa">平台不限 · 技术栈不限 · 开赛前即可开发</p><div class="flex flex-wrap justify-center gap-6" data-page-node-id="tG3yLrDzWtiVtpAJnwc7to"><button type="button" class="group px-10 py-4 bg-transparent border-2 border-[#ff00ff] text-[#00ffff] font-bold uppercase tracking-[0.15em] shadow-[0_0_15px_rgba(255,0,255,0.4),inset_0_0_10px_rgba(0,255,255,0.2)] hover:border-[#00ffff] hover:shadow-[0_0_30px_rgba(0,255,255,0.8),inset_0_0_20px_rgba(255,0,255,0.6)] active:scale-90 active:bg-white active:text-black active:shadow-[0_0_50px_#ffffff] transition-all duration-200 ease-out" data-page-node-id="kK78iGCRjFyCUByeJtXBAK" data-qq-qr>加社团群</button><a href="../docs.html" class="group px-10 py-4 bg-gradient-to-r from-[#ff00ff] via-[#7b68ee] to-[#ff00ff] bg-[length:200%_100%] text-white font-bold uppercase tracking-[0.15em] shadow-[0_0_30px_rgba(255,0,255,0.5)] hover:shadow-[0_0_50px_rgba(255,0,255,0.8)] hover:bg-right active:scale-90 active:bg-white active:text-black active:shadow-[0_0_50px_#ffffff] transition-all duration-500 ease-out" data-page-node-id="6Yh4bITgGFy0zDx8pm8duL">查看文档</a></div></div></section><section class="relative z-10 py-20 px-6" id="about" data-page-node-id="WWJvsjHzZyCV8IbFeT89ph"><div class="max-w-6xl mx-auto" data-page-node-id="mKZXYFCc8b5QY4VL6kASw1">
 <div class="flex items-center gap-3 mb-3" data-page-node-id="AZIZ1wQRJZBqVThXAtte9t"><div class="h-px flex-1 bg-gradient-to-r from-transparent to-[#ff00ff]/40" data-page-node-id="yAASU6RDlJ8BuJEI9OSutG"></div><span class="text-xs font-bold t-eyebrow uppercase tracking-[0.3em]" data-page-node-id="ZFKRhCusC8OzQ6yC5AbuTj">About</span><div class="h-px flex-1 bg-gradient-to-l from-transparent to-[#ff00ff]/40" data-page-node-id="W1rsxllLgSdmez0WIUvTNe"></div></div><h2 class="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#ff00ff] to-[#00ffff] mb-12 text-center uppercase tracking-wider" data-page-node-id="MQRsWG39grsu5HAmYnmRyz">活动介绍</h2>
 <div class="bg-gradient-to-br from-[#2d1b4e]/80 to-[#0d0221]/80 backdrop-blur-sm border border-[#ff00ff]/30 shadow-[0_0_30px_rgba(255,0,255,0.15)] p-8" style="margin-bottom:32px" data-page-node-id="o8CysE32Dbua2OF1gZpxEJ"><p class="text-base t-body leading-relaxed mb-4" data-page-node-id="0IBTAjQNL9AAc1VpK8eVI5">AI 应用创作大赛由龙川一中计算机协会（计算机社团）主办，面向全体社员开放。参赛方式很简单：用 AI Agent 做出一个有价值的应用，或者一款游戏——平台不限，技术栈不限，想做成什么样，全凭你的想象力。</p>
 <p class="text-base t-body leading-relaxed" data-page-node-id="KuxcRbTxPLDlO8PRPgdesD">我们办这场比赛，是希望充分释放大家的想象力、激发创造力，鼓励每位社员动手创造、不断进步。当你把一个想法真正做出来的那一刻，你就已经走在成为高级程序员或工程师的路上——未来的 AI 浪潮，正等着你们来接。</p></div>
@@ -93,7 +181,18 @@
 </div>
 <p class="text-xs t-muted leading-relaxed" style="max-width:780px;margin:32px auto 0;text-align:center" data-page-node-id="JsP9DW3OjAGaWr7v3yemvi">开源前记得清理密钥、密码和个人隐私信息；使用第三方素材时看清它的授权方式。</p>
 </div></section>
-<footer class="relative z-10 py-16 px-6 border-t border-[#ff00ff]/20 backdrop-blur-sm bg-[#0d0221]/60 mt-8" data-page-node-id="AIoTRNm8i03TzGzIfZdGFH"><div class="max-w-6xl mx-auto" data-page-node-id="20Zhvbyv4cKKrlAlToYoFZ"><div class="text-center mb-12" data-page-node-id="qYFdI2FGNfeNmhuFzrZOaB"><h2 class="text-4xl md:text-6xl font-black uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-[#ff00ff] via-[#7b68ee] to-[#00ffff] mb-4" data-page-node-id="snmuZ1p8VAkgiDnAuoBHdN">AI应用创作大赛</h2><p class="text-sm t-footer-sub uppercase tracking-[0.4em]" data-page-node-id="HsbV7fZR0VR53D0kUsWxbV">计算机协会 · 2026</p></div><div class="grid md:grid-cols-3 gap-8 mb-12" data-page-node-id="dCQzbMMGGdXELIe4IAJDe8"><div data-page-node-id="4Wke5fVHGGu3bVcbtL9A8D"><p class="text-xs font-bold t-eyebrow uppercase tracking-[0.25em] mb-4" data-page-node-id="4NqaDQEyPbHvY3qEOla8JK">宗旨</p><p class="text-sm t-footer-body leading-relaxed" data-page-node-id="D6XrPCzdMlHKJWI8UJVJdo">释放想象力，激发创造力。鼓励社员用 AI Agent 创造有价值的作品，向未来的高级程序员与工程师迈进。</p></div><div data-page-node-id="GsLpB4lEfJbiDYUWG1pyj7"><p class="text-xs font-bold t-step uppercase tracking-[0.25em] mb-4" data-page-node-id="AJPxj08WYVrC2Af1HxkHxS">赛程速览</p><ul class="space-y-2" data-page-node-id="9CNd6KCDVrBgQUzE6gsk9P"><li class="text-sm t-footer-body flex items-center gap-2" data-page-node-id="TarvlMxetrc5BUDom3ZciJ" style=""><span class="w-1 h-1 rounded-full bg-[#00ffff]" style="box-shadow: rgba(0, 255, 255, 0.8) 0px 0px 4px;" data-page-node-id="zU1yel3Robb33TCJzPE39V"></span>11.08 起 · 预热</li><li class="text-sm t-footer-body flex items-center gap-2" data-page-node-id="VTtzzSEK1824OvCb0eIABu"><span class="w-1 h-1 rounded-full bg-[#00ffff]" style="box-shadow:0 0 4px rgba(0,255,255,0.8)" data-page-node-id="0f0rFMymxknZzRmrhk0vGo"></span>11.21 · 正式开幕</li><li class="text-sm t-footer-body flex items-center gap-2" data-page-node-id="b4R89kDV2UPurJWLYoMgxM" style=""><span class="w-1 h-1 rounded-full bg-[#00ffff]" style="box-shadow: rgba(0, 255, 255, 0.8) 0px 0px 4px;" data-page-node-id="vsnHv4KEhcxaGdEpktjHvr"></span>12.31 · 提交截止</li><li class="text-sm t-footer-body flex items-center gap-2" data-page-node-id="c4VuGAGMqKsQ5KvFItxBOm" style=""><span class="w-1 h-1 rounded-full bg-[#00ffff]" style="box-shadow: rgba(0, 255, 255, 0.8) 0px 0px 4px;" data-page-node-id="n38wG5MECyzY4DCSIkL7XF"></span>27.1.1 · 评审</li><li class="text-sm t-footer-body flex items-center gap-2" data-page-node-id="7w4IQ2FzBd2EQvddlneZnj" style=""><span class="w-1 h-1 rounded-full bg-[#00ffff]" style="box-shadow: rgba(0, 255, 255, 0.8) 0px 0px 4px;" data-page-node-id="grqHjWqCfvqzeRhiSndlr7"></span>27.1.9 · 颁奖</li></ul></div><div data-page-node-id="IyXCRSBSvUH0xf51XZEzoe"><p class="text-xs font-bold text-[#7b68ee]/60 uppercase tracking-[0.25em] mb-4" data-page-node-id="zaFBqL3HRnZrJsLj4ur1QO">计算机协会</p><p class="text-sm t-footer-body leading-relaxed mb-4" data-page-node-id="uOQHGDn614YjyRKa4q6EBT">龙川一中计算机协会（计算机社团），让更多同学接触编程与 AI，成为未来的高级程序员与工程师。</p><a class="inline-flex items-center gap-2 text-xs font-bold t-card-title uppercase tracking-wider hover:text-[#00ffff] transition-colors duration-200" href="https://qun.qq.com/universal-share/share?ac=1&amp;authKey=%2BUw3wONrcpp5oVjkbDVVsOi4W2r%2FDtMYBXjppgTMOxCS6rGFfsH%2FRzTHlcrMV3%2Fu&amp;busi_data=eyJncm91cENvZGUiOiIzMzQ5NjU0MjEiLCJ0b2tlbiI6IjNVQ051R3lOb1ZlNHpsbGhsMnR2ME5RVGhjK3JxUm5jSDdqb1Q0WWRZSFhESFFyRWNwc2RnU3ZwS3hCa2pHWVIiLCJ1aW4iOiIzMTAxOTI1NDMwIn0%3D&amp;data=1biB2Nkf64EtJ5EzC1P7lbwUkk56yjMYsl7DNeX50FagsJ_9N8lu7IEF44ryfDrpO8PPICQjFdsu7H-K74VgRA&amp;svctype=4&amp;tempid=h5_group_info" target="_blank" rel="noopener" data-page-node-id="4GsKMkgHIk0rqNYoIz0UT2">加社团群<svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" data-page-node-id="3yt9YIYSfRXidgtOlerigU"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-page-node-id="TzEciCCEpuy22iSLiWEYzS"></path></svg></a></div></div><div class="border-t border-[#ff00ff]/15 pt-8 flex flex-col md:flex-row items-center justify-between gap-4" data-page-node-id="EgJfdwIIFbYHBTNeFqx9uJ"><p class="text-xs t-footer-dim uppercase tracking-[0.3em]" data-page-node-id="Hvp6OfWjUyof5ar5BxBeZ3">龙川一中计算机协会 · AI 应用创作大赛 2026</p><div class="flex items-center gap-6" data-page-node-id="WqLqtRGdEyVIXUHV0BWh2e"><a class="text-xs t-footer-link hover:text-[#00ffff] uppercase tracking-wider transition-colors duration-200" href="../docs.html" data-page-node-id="t6WRHbCmdYir5vhyRWie0c">查看文档</a><a class="text-xs t-footer-link hover:text-[#00ffff] uppercase tracking-wider transition-colors duration-200" href="https://qun.qq.com/universal-share/share?ac=1&amp;authKey=%2BUw3wONrcpp5oVjkbDVVsOi4W2r%2FDtMYBXjppgTMOxCS6rGFfsH%2FRzTHlcrMV3%2Fu&amp;busi_data=eyJncm91cENvZGUiOiIzMzQ5NjU0MjEiLCJ0b2tlbiI6IjNVQ051R3lOb1ZlNHpsbGhsMnR2ME5RVGhjK3JxUm5jSDdqb1Q0WWRZSFhESFFyRWNwc2RnU3ZwS3hCa2pHWVIiLCJ1aW4iOiIzMTAxOTI1NDMwIn0%3D&amp;data=1biB2Nkf64EtJ5EzC1P7lbwUkk56yjMYsl7DNeX50FagsJ_9N8lu7IEF44ryfDrpO8PPICQjFdsu7H-K74VgRA&amp;svctype=4&amp;tempid=h5_group_info" target="_blank" rel="noopener" data-page-node-id="VZGGKyBkmuaFz31EjeXxwy">加社团群</a></div><p class="text-xs t-footer-dim uppercase tracking-[0.3em]" data-page-node-id="QiErXwNrDF70wDfWOf1TRB">想象力就是入场券</p></div></div></footer></div></div>
+<footer class="relative z-10 py-16 px-6 border-t border-[#ff00ff]/20 backdrop-blur-sm bg-[#0d0221]/60 mt-8" data-page-node-id="AIoTRNm8i03TzGzIfZdGFH"><div class="max-w-6xl mx-auto" data-page-node-id="20Zhvbyv4cKKrlAlToYoFZ"><div class="text-center mb-12" data-page-node-id="qYFdI2FGNfeNmhuFzrZOaB"><h2 class="text-4xl md:text-6xl font-black uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-[#ff00ff] via-[#7b68ee] to-[#00ffff] mb-4" data-page-node-id="snmuZ1p8VAkgiDnAuoBHdN">AI应用创作大赛</h2><p class="text-sm t-footer-sub uppercase tracking-[0.4em]" data-page-node-id="HsbV7fZR0VR53D0kUsWxbV">计算机协会 · 2026</p></div><div class="grid md:grid-cols-3 gap-8 mb-12" data-page-node-id="dCQzbMMGGdXELIe4IAJDe8"><div data-page-node-id="4Wke5fVHGGu3bVcbtL9A8D"><p class="text-xs font-bold t-eyebrow uppercase tracking-[0.25em] mb-4" data-page-node-id="4NqaDQEyPbHvY3qEOla8JK">宗旨</p><p class="text-sm t-footer-body leading-relaxed" data-page-node-id="D6XrPCzdMlHKJWI8UJVJdo">释放想象力，激发创造力。鼓励社员用 AI Agent 创造有价值的作品，向未来的高级程序员与工程师迈进。</p></div><div data-page-node-id="GsLpB4lEfJbiDYUWG1pyj7"><p class="text-xs font-bold t-step uppercase tracking-[0.25em] mb-4" data-page-node-id="AJPxj08WYVrC2Af1HxkHxS">赛程速览</p><ul class="space-y-2" data-page-node-id="9CNd6KCDVrBgQUzE6gsk9P"><li class="text-sm t-footer-body flex items-center gap-2" data-page-node-id="TarvlMxetrc5BUDom3ZciJ" style=""><span class="w-1 h-1 rounded-full bg-[#00ffff]" style="box-shadow: rgba(0, 255, 255, 0.8) 0px 0px 4px;" data-page-node-id="zU1yel3Robb33TCJzPE39V"></span>11.08 起 · 预热</li><li class="text-sm t-footer-body flex items-center gap-2" data-page-node-id="VTtzzSEK1824OvCb0eIABu"><span class="w-1 h-1 rounded-full bg-[#00ffff]" style="box-shadow:0 0 4px rgba(0,255,255,0.8)" data-page-node-id="0f0rFMymxknZzRmrhk0vGo"></span>11.21 · 正式开幕</li><li class="text-sm t-footer-body flex items-center gap-2" data-page-node-id="b4R89kDV2UPurJWLYoMgxM" style=""><span class="w-1 h-1 rounded-full bg-[#00ffff]" style="box-shadow: rgba(0, 255, 255, 0.8) 0px 0px 4px;" data-page-node-id="vsnHv4KEhcxaGdEpktjHvr"></span>12.31 · 提交截止</li><li class="text-sm t-footer-body flex items-center gap-2" data-page-node-id="c4VuGAGMqKsQ5KvFItxBOm" style=""><span class="w-1 h-1 rounded-full bg-[#00ffff]" style="box-shadow: rgba(0, 255, 255, 0.8) 0px 0px 4px;" data-page-node-id="n38wG5MECyzY4DCSIkL7XF"></span>27.1.1 · 评审</li><li class="text-sm t-footer-body flex items-center gap-2" data-page-node-id="7w4IQ2FzBd2EQvddlneZnj" style=""><span class="w-1 h-1 rounded-full bg-[#00ffff]" style="box-shadow: rgba(0, 255, 255, 0.8) 0px 0px 4px;" data-page-node-id="grqHjWqCfvqzeRhiSndlr7"></span>27.1.9 · 颁奖</li></ul></div><div data-page-node-id="IyXCRSBSvUH0xf51XZEzoe"><p class="text-xs font-bold text-[#7b68ee]/60 uppercase tracking-[0.25em] mb-4" data-page-node-id="zaFBqL3HRnZrJsLj4ur1QO">计算机协会</p><p class="text-sm t-footer-body leading-relaxed mb-4" data-page-node-id="uOQHGDn614YjyRKa4q6EBT">龙川一中计算机协会（计算机社团），让更多同学接触编程与 AI，成为未来的高级程序员与工程师。</p><button type="button" class="inline-flex items-center gap-2 text-xs font-bold t-card-title uppercase tracking-wider hover:text-[#00ffff] transition-colors duration-200" data-page-node-id="4GsKMkgHIk0rqNYoIz0UT2" data-qq-qr>加社团群<svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" data-page-node-id="3yt9YIYSfRXidgtOlerigU"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-page-node-id="TzEciCCEpuy22iSLiWEYzS"></path></svg></button></div></div><div class="border-t border-[#ff00ff]/15 pt-8 flex flex-col md:flex-row items-center justify-between gap-4" data-page-node-id="EgJfdwIIFbYHBTNeFqx9uJ"><p class="text-xs t-footer-dim uppercase tracking-[0.3em]" data-page-node-id="Hvp6OfWjUyof5ar5BxBeZ3">龙川一中计算机协会 · AI 应用创作大赛 2026</p><div class="flex items-center gap-6" data-page-node-id="WqLqtRGdEyVIXUHV0BWh2e"><a class="text-xs t-footer-link hover:text-[#00ffff] uppercase tracking-wider transition-colors duration-200" href="../docs.html" data-page-node-id="t6WRHbCmdYir5vhyRWie0c">查看文档</a><button type="button" class="text-xs t-footer-link hover:text-[#00ffff] uppercase tracking-wider transition-colors duration-200" data-page-node-id="VZGGKyBkmuaFz31EjeXxwy" data-qq-qr>加社团群</button></div><p class="text-xs t-footer-dim uppercase tracking-[0.3em]" data-page-node-id="QiErXwNrDF70wDfWOf1TRB">想象力就是入场券</p></div></div></footer></div></div>
+<div class="cz-qr" data-qq-qr-modal>
+  <div class="cz-qr__mask" data-qq-qr-close></div>
+  <div class="cz-qr__panel" role="dialog" aria-modal="true" aria-labelledby="cz-qr-title">
+    <button type="button" class="cz-qr__close" data-qq-qr-close aria-label="关闭二维码">
+      <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"></path></svg>
+    </button>
+    <p class="cz-qr__title" id="cz-qr-title">2027 届计算机社团群</p>
+    <img class="cz-qr__img" src="../assets/img/qq-group-qrcode.jpg" alt="2027 届计算机社团群二维码，群号 334965421" width="760" height="947" decoding="async">
+    <p class="cz-qr__hint">手机 QQ 扫码加入 · 群号 334965421</p>
+  </div>
+</div>
 <script data-page-node-id="sFASxr7yf2t6EFzGN7fx6c">
 (function () {
   /* 返回按钮按来源判断：从活动排期点进来的回活动排期，直接打开或从别处来的回首页 */
@@ -131,6 +230,50 @@
     announceClose.addEventListener("click", function () {
       /* 条上有 flex 类，display 优先级高于 [hidden]，只能用行内样式关掉 */
       announceBar.style.display = "none";
+    });
+  }
+
+  /* 加社团群：原来跳 QQ 群链接，改为弹出群二维码 */
+  var qrModal = document.querySelector("[data-qq-qr-modal]");
+  var qrTriggers = document.querySelectorAll("[data-qq-qr]");
+  var qrLastFocus = null;
+
+  function closeQr() {
+    if (!qrModal || !qrModal.classList.contains("is-open")) return;
+    qrModal.classList.remove("is-open");
+    document.body.classList.remove("cz-qr-open");
+    if (qrLastFocus) qrLastFocus.focus();
+  }
+
+  if (qrModal && qrTriggers.length) {
+    var qrCloseBtn = qrModal.querySelector(".cz-qr__close");
+
+    Array.prototype.forEach.call(qrTriggers, function (btn) {
+      btn.addEventListener("click", function () {
+        qrLastFocus = btn;
+        qrModal.classList.add("is-open");
+        document.body.classList.add("cz-qr-open");
+        if (qrCloseBtn) qrCloseBtn.focus();
+      });
+    });
+
+    Array.prototype.forEach.call(
+      qrModal.querySelectorAll("[data-qq-qr-close]"),
+      function (el) {
+        el.addEventListener("click", closeQr);
+      }
+    );
+
+    document.addEventListener("keydown", function (event) {
+      if (!qrModal.classList.contains("is-open")) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeQr();
+      } else if (event.key === "Tab") {
+        /* 弹层里只有关闭按钮可聚焦，焦点留在层内 */
+        event.preventDefault();
+        if (qrCloseBtn) qrCloseBtn.focus();
+      }
     });
   }
 })();
