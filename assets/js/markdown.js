@@ -46,8 +46,18 @@
       );
     });
 
-    out = out.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-    out = out.replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>");
+    /* 强调：先吃三连星，再用两轮「粗体 → 斜体」，
+       这样 粗中带斜 和 斜中带粗 两种嵌套都能收敛 */
+    out = out.replace(/\*\*\*([^*\n]+)\*\*\*/g, "<strong><em>$1</em></strong>");
+    for (var round = 0; round < 2; round += 1) {
+      out = out.replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>");
+      out = out.replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>");
+    }
+    /* 下划线斜体：两侧要求非字母数字，避免把 snake_case_name 拆开 */
+    out = out.replace(
+      /(^|[^A-Za-z0-9_])_([^_\n]+)_(?![A-Za-z0-9_])/g,
+      "$1<em>$2</em>"
+    );
     return out;
   }
 
