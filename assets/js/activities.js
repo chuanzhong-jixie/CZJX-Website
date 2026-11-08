@@ -50,6 +50,17 @@
       children.push(details);
     }
 
+    /* 有独立活动页时给出入口 */
+    if (item.link) {
+      children.push(
+        CZJX.el("a", {
+          className: "btn btn--sm activity__cta",
+          href: item.link,
+          text: item.linkLabel || "了解详情 →",
+        })
+      );
+    }
+
     return CZJX.el("article", {
       className: "card activity activity--" + status,
       id: item.id,

@@ -23,12 +23,14 @@
 ├── about.html                关于社团：方向、架构、加入方式、联系方式
 ├── 404.html                  404 页
 ├── _headers                  Cloudflare Pages 响应头（安全 + 缓存策略）
+├── events/                   独立活动页（自带样式，不是站点模板的一部分）
 ├── data/
 │   ├── activities.json       活动数据
 │   └── docs.json             文档目录
 ├── content/docs/*.md         文档正文
 └── assets/
     ├── css/style.css         全部样式（含主题 Token）
+    ├── img/                  站点图标与 logo
     └── js/
         ├── app.js            共享工具：取数、日期、状态推导、状态区渲染
         ├── activities.js     活动列表
@@ -73,9 +75,13 @@ python -m http.server 8000
   "location": "图书馆2楼 · 计算机活动室",
   "tags": ["分享会"],
   "summary": "一句话说明这场活动讲什么。",
-  "details": ["19:00 — 第一段", "19:40 — 第二段"]
+  "details": ["19:00 — 第一段", "19:40 — 第二段"],
+  "link": "events/ai-contest.html",
+  "linkLabel": "查看大赛详情 →"
 }
 ```
+
+`link` 可选。填了就在卡片底部生成一个按钮，指向独立活动页；`linkLabel` 是按钮文案，不写则默认「了解详情 →」。
 
 - `id` 会作为页内锚点，保持唯一，用英文小写加连字符。
 - **不要手动写「已结束」「即将开始」**。状态由 `startAt` / `endAt` 与当前时间比较得出，全站自动同步。

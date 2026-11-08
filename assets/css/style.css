@@ -656,6 +656,12 @@ main {
   box-shadow: 0 0 8px rgba(0, 255, 255, 0.9);
 }
 
+/* 活动详情入口：卡片是 grid，按钮不撑满整行 */
+.activity__cta {
+  justify-self: start;
+  margin-top: 0.35rem;
+}
+
 /* 已结束：去强调，不再是可执行的下一步 */
 .activity--ended .activity__title {
   color: rgba(255, 255, 255, 0.64);
