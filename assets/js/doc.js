@@ -12,10 +12,36 @@
   var params = new URLSearchParams(window.location.search);
   var docId = params.get("id");
 
+  /* 分享卡片跟着当前文档走：爬虫读的是静态标签，这里保证人和部分客户端看到的是这一篇 */
+  function setSocial(title, description) {
+    var pairs = [
+      ['meta[name="description"]', description],
+      ['meta[property="og:title"]', title],
+      ['meta[name="twitter:title"]', title],
+      ['meta[property="og:description"]', description],
+      ['meta[name="twitter:description"]', description]
+    ];
+    pairs.forEach(function (pair) {
+      var node = document.querySelector(pair[0]);
+      if (node && pair[1]) node.setAttribute("content", pair[1]);
+    });
+
+    var urlNode = document.querySelector('meta[property="og:url"]');
+    if (urlNode) {
+      urlNode.setAttribute(
+        "content",
+        location.origin +
+          location.pathname +
+          (docId ? "?id=" + encodeURIComponent(docId) : "")
+      );
+    }
+  }
+
   function setHead(doc) {
     if (titleEl) titleEl.textContent = doc.title;
     if (categoryEl) categoryEl.textContent = doc.category || "未分类";
     document.title = doc.title + " · 川中计协";
+    setSocial(doc.title + " · 川中计协", doc.summary || doc.title);
 
     if (metaEl) {
       metaEl.replaceChildren(
@@ -37,6 +63,7 @@
     if (metaEl) metaEl.replaceChildren();
     if (categoryEl) categoryEl.textContent = "未找到";
     document.title = "文档不可用 · 川中计协";
+    setSocial("文档不可用 · 川中计协", "这篇文档不存在，或还没有对外发布。");
   }
 
   function load() {

@@ -87,7 +87,7 @@ python -m http.server 8000
 
 独立活动页左上角的返回按钮会读 `document.referrer`：从活动排期点进去的返回「活动排期」，直接打开或从别处进来的返回「首页」。页内已内置这段脚本，新增活动页时复制 `events/ai-contest.html` 的写法即可。
 
-活动页的分享预览（微信、QQ、Telegram 等）由 `<head>` 里的 `og:*` / `twitter:*` 标签决定，标题、描述、配图都在那里。配图是 `assets/img/ai-contest-og.png`（1200×630）。**其中 `og:image` / `og:url` 写的是绝对地址**（当前 `https://czjx-website.pages.dev`），绑定自定义域名后必须同步改掉，否则分享卡片取不到图。
+活动页的分享预览标签写在页内 `<head>`，配图是 `assets/img/ai-contest-og.png`。规则见下面「分享预览」一节。
 
 - `id` 会作为页内锚点，保持唯一，用英文小写加连字符。
 - **不要手动写「已结束」「即将开始」**。状态由 `startAt` / `endAt` 与当前时间比较得出，全站自动同步。
@@ -125,6 +125,16 @@ python -m http.server 8000
 - 首页与 `about.html` 里「图书馆2楼」「每周三第 8 节课」等活动室与时间描述。
 - 页脚年份与 `_headers` 中的安全策略（如需嵌入外部内容，需放宽 `X-Frame-Options`）。
 - 各页 `<meta name="description">` 如需针对具体学校措辞调整。
+
+## 分享预览（OG 标签）
+
+每个页面的 `<head>` 里都有一组 `og:*` / `twitter:*` 标签，决定链接被转发到微信、QQ、Telegram 等平台时显示的卡片。
+
+- 分享图两张，都是 1200×630：`assets/img/og-default.png`（站点通用）、`assets/img/ai-contest-og.png`（大赛页专用）。
+- `og:image` / `og:url` 必须是绝对地址，目前写死 `https://czjx0.pages.dev`。**换域名时这 7 个文件都要改**：`index.html`、`activities.html`、`docs.html`、`doc.html`、`about.html`、`events/ai-contest.html`、本文件。
+- `doc.html` 的 `og:title` / `og:description` / `og:url` 由 `doc.js` 在文档载入后按当前文档改写；爬虫不执行 JS，读到的仍是静态那一份，所以静态值写的是「文档 · 川中计协」这种通用文案。
+- `404.html` 故意不加，它已经 `noindex`，也没人希望错误页出现在卡片里。
+- 微信对抓过的链接有缓存，改完测试时给网址加个 `?v=1` 之类的参数再看。
 
 ## 设计与可访问性约定
 
