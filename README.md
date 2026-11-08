@@ -130,7 +130,10 @@ python -m http.server 8000
 
 每个页面的 `<head>` 里都有一组 `og:*` / `twitter:*` 标签，决定链接被转发到微信、QQ、Telegram 等平台时显示的卡片。
 
-- 分享图两张，都是 1200×630：`assets/img/og-default.png`（站点通用）、`assets/img/ai-contest-og.png`（大赛页专用）。
+- 分享图有两套比例，共 4 张：
+  - **方形 1080×1080**：`og-default-square.png`、`ai-contest-square.png`，给 `og:image` 用。
+  - **横版 1200×630**：`og-default.png`、`ai-contest-og.png`，给 `twitter:image` 用。
+- 为什么要方形：微信、QQ 的会话列表缩略图是**正方形并居中裁切**，横版图会被切掉两侧，只剩中间一小块。方形图无论怎么裁都完整。
 - `og:image` / `og:url` 必须是绝对地址，目前写死 `https://czjx0.pages.dev`。**换域名时这 7 个文件都要改**：`index.html`、`activities.html`、`docs.html`、`doc.html`、`about.html`、`events/ai-contest.html`、本文件。
 - `doc.html` 的 `og:title` / `og:description` / `og:url` 由 `doc.js` 在文档载入后按当前文档改写；爬虫不执行 JS，读到的仍是静态那一份，所以静态值写的是「文档 · 川中计协」这种通用文案。
 - `404.html` 故意不加，它已经 `noindex`，也没人希望错误页出现在卡片里。
