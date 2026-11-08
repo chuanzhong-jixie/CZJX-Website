@@ -173,10 +173,32 @@
     return error.message || String(error);
   };
 
-  /* 正文配图点击放大：包一层按钮，键盘可操作，Esc / 点遮罩关闭 */
+  /* 正文配图放大：滚轮 / 双指 / 按钮缩放，可拖动平移，Esc 或点遮罩关闭 */
   CZJX.enableImageZoom = function (root) {
     var images = root.querySelectorAll("img");
     if (!images.length) return;
+
+    var MIN_SCALE = 1;
+    var MAX_SCALE = 5;
+
+    var ICONS = {
+      close:
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+      zoomIn:
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M20 20l-4.2-4.2"/></svg>',
+      zoomOut:
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M7.5 10.5h6M20 20l-4.2-4.2"/></svg>',
+    };
+
+    function iconButton(className, label, icon) {
+      var btn = el("button", {
+        type: "button",
+        className: className,
+        "aria-label": label,
+      });
+      btn.innerHTML = ICONS[icon];
+      return btn;
+    }
 
     var box = el("div", {
       className: "lightbox",
@@ -185,23 +207,74 @@
       "aria-label": "图片预览",
       hidden: true,
     });
-    var closeBtn = el("button", {
-      type: "button",
-      className: "lightbox__close",
-      "aria-label": "关闭预览",
-      text: "×",
-    });
+    var stage = el("div", { className: "lightbox__stage" });
     var big = el("img", { className: "lightbox__img", alt: "" });
+    var closeBtn = iconButton("lightbox__btn lightbox__close", "关闭预览", "close");
+    var zoomOutBtn = iconButton("lightbox__btn", "缩小", "zoomOut");
+    var zoomInBtn = iconButton("lightbox__btn", "放大", "zoomIn");
+    var zoomBar = el("div", { className: "lightbox__zoom" }, [zoomOutBtn, zoomInBtn]);
+
+    stage.appendChild(big);
+    box.appendChild(stage);
     box.appendChild(closeBtn);
-    box.appendChild(big);
+    box.appendChild(zoomBar);
     document.body.appendChild(box);
 
     var lastFocus = null;
+    var scale = 1;
+    var tx = 0;
+    var ty = 0;
+
+    function apply() {
+      big.style.transform =
+        "translate(" + tx + "px," + ty + "px) scale(" + scale + ")";
+      stage.classList.toggle("is-zoomed", scale > 1);
+      zoomOutBtn.disabled = scale <= MIN_SCALE;
+      zoomInBtn.disabled = scale >= MAX_SCALE;
+    }
+
+    function clampPan() {
+      var overflowX = Math.max(0, (big.offsetWidth * scale - stage.clientWidth) / 2);
+      var overflowY = Math.max(0, (big.offsetHeight * scale - stage.clientHeight) / 2);
+      tx = Math.max(-overflowX, Math.min(overflowX, tx));
+      ty = Math.max(-overflowY, Math.min(overflowY, ty));
+    }
+
+    /* 以舞台中心为原点，按住某个点缩放时该点保持不动 */
+    function zoomTo(next, cx, cy) {
+      var target = Math.max(MIN_SCALE, Math.min(MAX_SCALE, next));
+      if (target === scale) return;
+      var k = target / scale;
+      tx = cx - (cx - tx) * k;
+      ty = cy - (cy - ty) * k;
+      scale = target;
+      if (scale === MIN_SCALE) {
+        tx = 0;
+        ty = 0;
+      }
+      clampPan();
+      apply();
+    }
+
+    function zoomBy(factor, clientX, clientY) {
+      var rect = stage.getBoundingClientRect();
+      var cx = clientX === undefined ? 0 : clientX - rect.left - rect.width / 2;
+      var cy = clientY === undefined ? 0 : clientY - rect.top - rect.height / 2;
+      zoomTo(scale * factor, cx, cy);
+    }
+
+    function reset() {
+      scale = MIN_SCALE;
+      tx = 0;
+      ty = 0;
+      apply();
+    }
 
     function close() {
       box.hidden = true;
       big.removeAttribute("src");
       document.body.classList.remove("is-locked");
+      pointers.clear();
       if (lastFocus) lastFocus.focus();
     }
 
@@ -211,23 +284,130 @@
       big.setAttribute("alt", alt || "");
       box.hidden = false;
       document.body.classList.add("is-locked");
+      reset();
       closeBtn.focus();
     }
 
-    closeBtn.addEventListener("click", close);
-    /* 点遮罩关闭，点图片本身不关 */
-    box.addEventListener("click", function (event) {
-      if (event.target === box) close();
+    /* ---- 指针：单指拖动、双指捏合 ---- */
+    var pointers = new Map();
+    var dragStart = null;
+    var pinchStart = 0;
+    var pinchScale = 1;
+    var didDrag = false;
+
+    stage.addEventListener("pointerdown", function (event) {
+      stage.setPointerCapture(event.pointerId);
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      didDrag = false;
+
+      if (pointers.size === 1) {
+        dragStart = { x: event.clientX, y: event.clientY, tx: tx, ty: ty };
+      } else if (pointers.size === 2) {
+        dragStart = null;
+        var pts = Array.from(pointers.values());
+        pinchStart = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+        pinchScale = scale;
+      }
     });
+
+    stage.addEventListener("pointermove", function (event) {
+      if (!pointers.has(event.pointerId)) return;
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+
+      if (pointers.size === 2) {
+        var pts = Array.from(pointers.values());
+        var dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+        if (pinchStart > 0 && dist > 0) {
+          didDrag = true;
+          zoomBy(
+            (pinchScale * (dist / pinchStart)) / scale,
+            (pts[0].x + pts[1].x) / 2,
+            (pts[0].y + pts[1].y) / 2
+          );
+        }
+        return;
+      }
+
+      if (!dragStart || scale <= MIN_SCALE) return;
+      var dx = event.clientX - dragStart.x;
+      var dy = event.clientY - dragStart.y;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) didDrag = true;
+      tx = dragStart.tx + dx;
+      ty = dragStart.ty + dy;
+      clampPan();
+      apply();
+    });
+
+    function endPointer(event) {
+      pointers.delete(event.pointerId);
+      if (pointers.size === 0) {
+        dragStart = null;
+        pinchStart = 0;
+      } else if (pointers.size === 1) {
+        var rest = Array.from(pointers.values())[0];
+        dragStart = { x: rest.x, y: rest.y, tx: tx, ty: ty };
+        pinchStart = 0;
+      }
+      stage.classList.remove("is-dragging");
+    }
+
+    stage.addEventListener("pointerup", endPointer);
+    stage.addEventListener("pointercancel", endPointer);
+
+    /* ---- 滚轮缩放 ---- */
+    stage.addEventListener(
+      "wheel",
+      function (event) {
+        event.preventDefault();
+        zoomBy(Math.exp(-event.deltaY * 0.0015), event.clientX, event.clientY);
+      },
+      { passive: false }
+    );
+
+    stage.addEventListener("dblclick", function (event) {
+      event.preventDefault();
+      if (scale > MIN_SCALE) reset();
+      else zoomBy(2.5, event.clientX, event.clientY);
+    });
+
+    /* 点遮罩关闭；拖完手松开的那一下不算点击 */
+    stage.addEventListener("click", function (event) {
+      if (didDrag) {
+        didDrag = false;
+        return;
+      }
+      if (event.target === stage) close();
+    });
+
+    zoomInBtn.addEventListener("click", function () {
+      zoomBy(1.4);
+    });
+    zoomOutBtn.addEventListener("click", function () {
+      zoomBy(1 / 1.4);
+    });
+    closeBtn.addEventListener("click", close);
+
     document.addEventListener("keydown", function (event) {
       if (box.hidden) return;
       if (event.key === "Escape") {
         event.preventDefault();
         close();
-      } else if (event.key === "Tab") {
-        /* 弹层里只有关闭按钮可聚焦，Tab 就地循环 */
+      } else if (event.key === "+" || event.key === "=") {
         event.preventDefault();
-        closeBtn.focus();
+        zoomBy(1.4);
+      } else if (event.key === "-") {
+        event.preventDefault();
+        zoomBy(1 / 1.4);
+      } else if (event.key === "0") {
+        event.preventDefault();
+        reset();
+      } else if (event.key === "Tab") {
+        /* 焦点只在弹层内的三个按钮之间循环 */
+        var list = [closeBtn, zoomOutBtn, zoomInBtn];
+        var i = list.indexOf(document.activeElement);
+        var next = (i + (event.shiftKey ? -1 : 1) + list.length) % list.length;
+        event.preventDefault();
+        list[next].focus();
       }
     });
 

@@ -1159,9 +1159,6 @@ body.is-locked {
   position: fixed;
   inset: 0;
   z-index: 80;
-  display: grid;
-  place-items: center;
-  padding: clamp(1rem, 4vw, 3rem);
   background: rgba(5, 5, 10, 0.94);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
@@ -1171,18 +1168,38 @@ body.is-locked {
   display: none;
 }
 
+/* 舞台负责裁切与居中，图片的缩放平移全交给 transform */
+.lightbox__stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  touch-action: none;
+  cursor: zoom-out;
+}
+
+.lightbox__stage.is-zoomed {
+  cursor: grab;
+}
+
+.lightbox__stage.is-zoomed:active {
+  cursor: grabbing;
+}
+
 .lightbox__img {
   max-width: 100%;
   max-height: 100%;
   border: 1px solid var(--line-cyan-strong);
   background: var(--bg-deep);
   box-shadow: 0 0 40px rgba(0, 255, 255, 0.22);
+  transform-origin: center center;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform;
 }
 
-.lightbox__close {
-  position: absolute;
-  top: clamp(0.75rem, 2vw, 1.5rem);
-  right: clamp(0.75rem, 2vw, 1.5rem);
+.lightbox__btn {
   display: grid;
   place-items: center;
   width: 2.75rem;
@@ -1190,67 +1207,40 @@ body.is-locked {
   border: 1px solid var(--cyan);
   background: rgba(10, 10, 15, 0.9);
   color: var(--cyan);
-  font-family: var(--font);
-  font-size: 1.3rem;
-  line-height: 1;
   cursor: pointer;
   box-shadow: var(--glow-sm);
 }
 
-.lightbox__close:hover,
-.lightbox__close:focus-visible {
+.lightbox__btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.lightbox__btn:hover:not(:disabled),
+.lightbox__btn:focus-visible {
   background: rgba(0, 255, 255, 0.12);
   box-shadow: var(--glow-lg);
 }
 
-.prose blockquote {
-  margin: 1.2rem 0 0;
-  padding: 0.7rem 1rem;
-  border-left: 2px solid var(--cyan);
-  background: rgba(0, 255, 255, 0.06);
-  color: var(--dim);
-  box-shadow: -8px 0 20px -14px rgba(0, 255, 255, 0.9);
+.lightbox__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
-.prose blockquote p + p {
-  margin-top: 0.55rem;
+.lightbox__close {
+  position: absolute;
+  top: clamp(0.75rem, 2vw, 1.5rem);
+  right: clamp(0.75rem, 2vw, 1.5rem);
 }
 
-.prose hr {
-  margin: 1.9rem 0;
-  border: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(0, 255, 255, 0.5),
-    rgba(255, 0, 255, 0.5),
-    transparent
-  );
-}
-
-/* 表格保持真实表格布局：display:block 会让浏览器生成匿名表格盒，撑爆宽高 */
-.prose table {
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: collapse;
-  font-size: 0.82rem;
-}
-
-.prose th,
-.prose td {
-  padding: 0.5rem 0.7rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: left;
-  vertical-align: top;
-  overflow-wrap: anywhere;
-}
-
-.prose th {
-  background: rgba(0, 255, 255, 0.08);
-  color: var(--text-strong);
-  font-weight: 700;
-  letter-spacing: 0.04em;
+.lightbox__zoom {
+  position: absolute;
+  bottom: clamp(0.75rem, 2vw, 1.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
 }
 
 /* -------------------------------- 关于页 -------------------------------- */
