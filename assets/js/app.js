@@ -172,4 +172,76 @@
     if (error instanceof TypeError) return "网络不可用，或数据文件路径不正确";
     return error.message || String(error);
   };
+
+  /* 正文配图点击放大：包一层按钮，键盘可操作，Esc / 点遮罩关闭 */
+  CZJX.enableImageZoom = function (root) {
+    var images = root.querySelectorAll("img");
+    if (!images.length) return;
+
+    var box = el("div", {
+      className: "lightbox",
+      role: "dialog",
+      "aria-modal": "true",
+      "aria-label": "图片预览",
+      hidden: true,
+    });
+    var closeBtn = el("button", {
+      type: "button",
+      className: "lightbox__close",
+      "aria-label": "关闭预览",
+      text: "×",
+    });
+    var big = el("img", { className: "lightbox__img", alt: "" });
+    box.appendChild(closeBtn);
+    box.appendChild(big);
+    document.body.appendChild(box);
+
+    var lastFocus = null;
+
+    function close() {
+      box.hidden = true;
+      big.removeAttribute("src");
+      document.body.classList.remove("is-locked");
+      if (lastFocus) lastFocus.focus();
+    }
+
+    function open(trigger, src, alt) {
+      lastFocus = trigger;
+      big.setAttribute("src", src);
+      big.setAttribute("alt", alt || "");
+      box.hidden = false;
+      document.body.classList.add("is-locked");
+      closeBtn.focus();
+    }
+
+    closeBtn.addEventListener("click", close);
+    /* 点遮罩关闭，点图片本身不关 */
+    box.addEventListener("click", function (event) {
+      if (event.target === box) close();
+    });
+    document.addEventListener("keydown", function (event) {
+      if (box.hidden) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close();
+      } else if (event.key === "Tab") {
+        /* 弹层里只有关闭按钮可聚焦，Tab 就地循环 */
+        event.preventDefault();
+        closeBtn.focus();
+      }
+    });
+
+    Array.prototype.forEach.call(images, function (img) {
+      var btn = el("button", {
+        type: "button",
+        className: "prose-figure",
+        "aria-label": "放大查看：" + (img.getAttribute("alt") || "文档配图"),
+      });
+      img.parentNode.insertBefore(btn, img);
+      btn.appendChild(img);
+      btn.addEventListener("click", function () {
+        open(btn, img.getAttribute("src"), img.getAttribute("alt"));
+      });
+    });
+  };
 })();

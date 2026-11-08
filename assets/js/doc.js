@@ -68,6 +68,7 @@
         }).then(function (text) {
           host.innerHTML = CZJX.renderMarkdown(text);
           host.removeAttribute("aria-busy");
+          CZJX.enableImageZoom(host);
         });
       })
       .catch(function (error) {

@@ -1136,6 +1136,73 @@ main {
   background: var(--bg-deep);
 }
 
+/* 图片外包一层按钮，键盘也能打开大图 */
+.prose-figure {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.prose-figure img {
+  margin-top: 0;
+}
+
+body.is-locked {
+  overflow: hidden;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  background: rgba(5, 5, 10, 0.94);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid var(--line-cyan-strong);
+  background: var(--bg-deep);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.22);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: clamp(0.75rem, 2vw, 1.5rem);
+  right: clamp(0.75rem, 2vw, 1.5rem);
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--cyan);
+  background: rgba(10, 10, 15, 0.9);
+  color: var(--cyan);
+  font-family: var(--font);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--glow-sm);
+}
+
+.lightbox__close:hover,
+.lightbox__close:focus-visible {
+  background: rgba(0, 255, 255, 0.12);
+  box-shadow: var(--glow-lg);
+}
+
 .prose blockquote {
   margin: 1.2rem 0 0;
   padding: 0.7rem 1rem;

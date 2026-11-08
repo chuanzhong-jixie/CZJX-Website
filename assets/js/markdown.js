@@ -28,7 +28,7 @@
         src +
         '" alt="' +
         alt +
-        '" loading="lazy" decoding="async">'
+        '" decoding="async">'
       );
     });
 
