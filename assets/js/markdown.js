@@ -20,6 +20,18 @@
       return "<code>" + code + "</code>";
     });
 
+    /* 图片必须排在链接之前处理，否则 ![]() 会被链接规则先吃掉 */
+    out = out.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function (_, alt, src) {
+      if (/^\s*(javascript|data):/i.test(src)) return alt;
+      return (
+        '<img src="' +
+        src +
+        '" alt="' +
+        alt +
+        '" loading="lazy" decoding="async">'
+      );
+    });
+
     out = out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (_, label, href) {
       var safe = /^(https?:|mailto:|#|\/|\.{1,2}\/)/i.test(href) ? href : "#";
       var external = /^https?:/i.test(safe);
@@ -158,6 +170,13 @@
         continue;
       }
 
+      /* 独立成行的图片不套段落，避免段落外边距和图片外边距叠加 */
+      if (/^\s*!\[/.test(line)) {
+        out.push(inline(line.trim()));
+        i += 1;
+        continue;
+      }
+
       /* 无序列表 */
       if (/^\s*[-*+]\s+/.test(line)) {
         var items = [];
@@ -180,12 +199,16 @@
       /* 有序列表 */
       if (/^\s*\d+[.)]\s+/.test(line)) {
         var ordered = [];
+        var startAt = parseInt(line, 10);
         while (i < lines.length && /^\s*\d+[.)]\s+/.test(lines[i])) {
           ordered.push(lines[i].replace(/^\s*\d+[.)]\s+/, ""));
           i += 1;
         }
+        /* 图片或引用把列表打断时，续接的编号要接着数 */
         out.push(
-          "<ol>" +
+          "<ol" +
+            (startAt > 1 ? ' start="' + startAt + '"' : "") +
+            ">" +
             ordered
               .map(function (item) {
                 return "<li>" + inline(item) + "</li>";

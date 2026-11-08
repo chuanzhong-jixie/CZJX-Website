@@ -1127,6 +1127,15 @@ main {
   font-size: 1em;
 }
 
+.prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-top: 1rem;
+  border: 1px solid var(--line-cyan);
+  background: var(--bg-deep);
+}
+
 .prose blockquote {
   margin: 1.2rem 0 0;
   padding: 0.7rem 1rem;

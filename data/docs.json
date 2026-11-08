@@ -1,4 +1,14 @@
 {
-  "updatedAt": "2026-11-07",
-  "docs": []
+  "updatedAt": "2026-11-08",
+  "docs": [
+    {
+      "id": "open-source-repo",
+      "title": "开源仓库该有什么东西",
+      "category": "开源与协作",
+      "updatedAt": "2026-11-08",
+      "summary": "README、LICENSE、.gitignore 各写什么，许可证怎么选，以及怎么让 AI 帮你管仓库。",
+      "path": "content/docs/open-source-repo.md",
+      "published": true
+    }
+  ]
 }
