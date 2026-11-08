@@ -15,7 +15,7 @@
   function setHead(doc) {
     if (titleEl) titleEl.textContent = doc.title;
     if (categoryEl) categoryEl.textContent = doc.category || "未分类";
-    document.title = doc.title + " · 川中计算机协会";
+    document.title = doc.title + " · 川中计协";
 
     if (metaEl) {
       metaEl.replaceChildren(
@@ -36,7 +36,7 @@
     if (titleEl) titleEl.textContent = "文档不可用";
     if (metaEl) metaEl.replaceChildren();
     if (categoryEl) categoryEl.textContent = "未找到";
-    document.title = "文档不可用 · 川中计算机协会";
+    document.title = "文档不可用 · 川中计协";
   }
 
   function load() {
