@@ -89,7 +89,7 @@ python -m http.server 8000
 
 活动页的分享预览标签写在页内 `<head>`，配图是 `assets/img/ai-contest-og.png`。规则见下面「分享预览」一节。
 
-「加社团群」是 4 个按钮（页头、首屏、卡片、页脚），点击弹出群二维码弹层，二维码图在 `assets/img/qq-group-qrcode.jpg`。
+「加社团群」在页头、活动介绍卡片、页脚三处，点击弹出群二维码弹层，二维码图在 `assets/img/qq-group-qrcode.jpg`。首屏那颗按钮是「提交作品」，指向腾讯文档的作品提交表单（`docs.qq.com/form/page/DV3JibGFiU0hJZXFr`），换表单时改这一个 href。
 
 评分规则单独一页：`events/ai-contest-rules.html`，从大赛页「评审标准」区块下方的「查看完整评分规则」进入，页首有「← 返回大赛」。这页是浅色主题、自带全套样式与锚点导航，与大赛页的深色风格不同，属有意为之。换群时重出这张图覆盖即可，文案里的群号在页内两处（弹层标题旁、提示行）需要一起改。
 
