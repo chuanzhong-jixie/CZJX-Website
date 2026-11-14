@@ -56,7 +56,7 @@
 
     if (!docs.length) {
       CZJX.renderState(host, "empty", {
-        message: "文档库还没有内容。整理完成的资料会陆续归档到这里。",
+        message: "文档库还没有内容。整理好的资料会陆续放上来。",
       });
       return;
     }

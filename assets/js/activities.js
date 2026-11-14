@@ -72,7 +72,7 @@
 
     if (!list.length) {
       CZJX.renderState(host, "empty", {
-        message: "暂无已发布的社团活动。新活动排期确定后会在这里更新。",
+        message: "还没有活动排期。定了会更新在这里。",
       });
       return;
     }
