@@ -1463,7 +1463,7 @@ a.value:focus-visible {
 
 @media (min-width: 44.06rem) {
   .pillars {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .doc-item {
@@ -1478,6 +1478,11 @@ a.value:focus-visible {
 
   .about-grid {
     grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  }
+
+  /* 三块面板时最后一块横跨整行（关于页「我们在做什么」），否则右侧空一格 */
+  .about-grid--span-last > :last-child {
+    grid-column: 1 / -1;
   }
 
   .footer-inner {
